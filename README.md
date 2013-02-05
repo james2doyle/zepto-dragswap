@@ -41,6 +41,7 @@ There is a function to detect animation end in the drop handler. Enabling dropAn
 To Do
 -----
 
+* control the attributes to be swapped
 * serialize/toArray/toJSON export
 * afterDrop function for AJAX save or something
 * elements actually sort and don't just swap

@@ -1,7 +1,7 @@
 HTML5 Sortable jQuery Plugin
 ============================
 
-**[Demos](http://james2doyle.github.com/zepto-drag-sort)**
+**[Demos](http://james2doyle.github.com/zepto-dragswap)**
 
 Why Not Sortable
 ----------------

@@ -3,7 +3,7 @@
  * Author: @james2doyle james2doyle@gmail.com
  * Licensed under the MIT license
  */
-;(function($) {
+ ;(function($) {
   $.fn.dragswap = function(options) {
     var dragSrcEl;
     function getPrefix() {
@@ -33,7 +33,10 @@
       dropClass: 'drop',
       dropAnimation: false,
       exclude: '.disabled',
-      prefix: getPrefix()
+      prefix: getPrefix(),
+      dropComplete: function() {
+        console.log('dropcomplete');
+      }
     };
 
     function onAnimEnd(elem) {
@@ -70,6 +73,17 @@
         return false;
       }
       var settings = $.extend({}, this.defaultOptions, options);
+      var method = String(options);
+      if (/^(toArray|toJSON)$/.test(method)) {
+        if (method == 'toArray') {
+          var items = [];
+          $(this).find(settings.element).each(function(index, elem) {
+            items.push($(this).attr('id'));
+          });
+          return items;
+        }
+        return;
+      }
       return this.each(function(index, item) {
         var $this = $(this);
         // select all but the disabled things
@@ -94,6 +108,7 @@
             onAnimEnd(this);
             onAnimEnd(dragSrcEl);
           }
+          settings.dropComplete();
         }
         return false;
       }

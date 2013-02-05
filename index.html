@@ -69,6 +69,9 @@
 		height: 80px;
 		text-align: center;
 	}
+	.funcs li {
+		border: 1px solid #eee;
+	}
 	#features li {
 		background: none;
 		border: none;
@@ -221,6 +224,13 @@
 		</ul>
 	</section>
 	<section>
+		<h2>Functions</h2>
+		<ul class="funcs">
+			<li id="item1">Item 1</li>
+			<li id="item2">Item 2</li>
+		</ul>
+	</section>
+	<section>
 		<h2>Resources</h2>
 			<ul>
 				<li><a href="http://www.html5rocks.com/en/tutorials/dnd/basics/">HTML5 Rocks Tutorial</a></li>
@@ -234,6 +244,13 @@
 	$(function() {
 		$('.sortable').dragswap({
 			dropAnimation: true
+		});
+		$('.funcs').dragswap({
+			dropAnimation: false,
+			dropClass: null,
+			dropComplete: function() {
+				console.log($('.funcs').dragswap('toArray'));
+			}
 		});
 	});
 	</script>

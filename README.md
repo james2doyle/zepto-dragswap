@@ -34,6 +34,11 @@ $('.sortable').dragswap({
 });
 ```
 
+``` javascript
+$('.sortable').dragswap('toArray');
+// returns the id of each element in the current order
+```
+
 Drop Animation
 --------------
 There is a function to detect animation end in the drop handler. Enabling dropAnimation will detect this. Otherwise the class will stay on the elements.
@@ -42,7 +47,7 @@ To Do
 -----
 
 * control the attributes to be swapped
-* serialize/toArray/toJSON export
+* serialize/toJSON export
 * afterDrop function for AJAX save or something
 * elements actually sort and don't just swap
 * test in <IE9 because classList should be used

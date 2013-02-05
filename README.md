@@ -49,7 +49,6 @@ To Do
 
 * control the attributes to be swapped
 * serialize/toJSON export
-* afterDrop function for AJAX save or something
 * elements actually sort and don't just swap
 * test in <IE9 because classList should be used
 * connected lists

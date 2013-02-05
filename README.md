@@ -30,7 +30,8 @@ $('.sortable').dragswap({
     dropClass: 'drop', // the class to add when the element is dropped
     dropAnimation: false, // do you want to detect animation end?
     exclude: '.disabled', // excluded elements class
-    prefix: getPrefix() // function to get the prefix of the browser
+    prefix: getPrefix(), // function to get the prefix of the browser
+    dropComplete: function(){} // what to do when the drop is complete
 });
 ```
 

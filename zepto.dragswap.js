@@ -35,7 +35,7 @@
       exclude: '.disabled',
       prefix: getPrefix(),
       dropComplete: function() {
-        console.log('dropcomplete');
+        return;
       }
     };
 

@@ -7,7 +7,7 @@
   $.fn.dragswap = function(options) {
     var dragSrcEl;
     function getPrefix() {
-      var d = document, el = d.createElement('p'),
+      var el = document.createElement('p'),
       getPre, transforms = {
         'webkitAnimation': '-webkit-animation',
         'OAnimation': '-o-animation',
@@ -15,7 +15,7 @@
         'MozAnimation': '-moz-animation',
         'animation': 'animation'
       };
-      d.body.insertBefore(el, null);
+      document.body.insertBefore(el, null);
       for(var t in transforms) {
         if(el.style[t] !== undefined) {
           el.style[t] = "translate3d(1px,1px,1px)";
@@ -24,7 +24,7 @@
           return t;
         }
       }
-      d.body.removeChild(el);
+      document.body.removeChild(el);
     }
     this.defaultOptions = {
       element: 'li',

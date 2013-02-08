@@ -77,6 +77,9 @@
 		border: none;
 		color: black;
 	}
+	#arrayResults {
+		color: #ff3399;
+	}
 	.disabled {
 		opacity: 0.5;
 	}
@@ -224,7 +227,7 @@
 		</ul>
 	</section>
 	<section>
-		<h2>Functions</h2>
+		<h2>Functions [<span id="arrayResults"></span>]</h2>
 		<ul class="funcs">
 			<li id="item1">Item 1</li>
 			<li id="item2">Item 2</li>
@@ -249,7 +252,8 @@
 			dropAnimation: false,
 			dropClass: null,
 			dropComplete: function() {
-				console.log($('.funcs').dragswap('toArray'));
+				var sortArray = $('.funcs').dragswap('toArray');
+				$('#arrayResults').html(sortArray.join(','));
 			}
 		});
 	});

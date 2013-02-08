@@ -34,10 +34,14 @@ $('.sortable').dragswap({
     dropComplete: function(){} // what to do when the drop is complete
 });
 ```
+serialize it
 
 ``` javascript
 $('.sortable').dragswap('toArray');
 // returns the id of each element in the current order
+
+$('.sortable').dragswap('toJSON');
+// returns a strigified json of the current order
 ```
 
 Drop Animation
@@ -48,7 +52,6 @@ To Do
 -----
 
 * control the attributes to be swapped
-* serialize/toJSON export
 * elements actually sort and don't just swap
 * test in <IE9 because classList should be used
 * connected lists

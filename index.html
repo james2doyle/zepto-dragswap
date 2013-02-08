@@ -54,8 +54,10 @@
 		padding: 5px;
 		height: 22px;
 	}
-	.sortable li {
+	li:hover {
 		cursor: move;
+	}
+	.sortable li {
 		border: 1px solid #d97815;
 		background: #ff9933;
 		color: #fff;
@@ -77,7 +79,7 @@
 		border: none;
 		color: black;
 	}
-	#arrayResults {
+	h2 span {
 		color: #ff3399;
 	}
 	.disabled {
@@ -227,10 +229,13 @@
 		</ul>
 	</section>
 	<section>
-		<h2>Functions [<span id="arrayResults"></span>]</h2>
+		<h2>Functions <em>toArray</em> <span id="arrayResults"></span></h2>
+		<h2><em>toJSON</em> <span id="jsonResults"></span></h2>
 		<ul class="funcs">
 			<li id="item1">Item 1</li>
 			<li id="item2">Item 2</li>
+			<li id="item3">Item 3</li>
+			<li id="item4">Item 4</li>
 		</ul>
 	</section>
 	<section>
@@ -242,7 +247,7 @@
 			</ul>
 	</section>
 	<script src="zepto.1.0.rc1.js"></script>
-	<script src="zepto.dragswap.js"></script>
+	<script src="zepto.dragswap.min.js"></script>
 	<script>
 	$(function() {
 		$('.sortable').dragswap({
@@ -252,7 +257,9 @@
 			dropAnimation: false,
 			dropComplete: function() {
 				var sortArray = $('.funcs').dragswap('toArray');
-				$('#arrayResults').html(sortArray.join(','));
+				$('#arrayResults').html('['+sortArray.join(',')+']');
+				var sortJSON = $('.funcs').dragswap('toJSON');
+				$('#jsonResults').html(sortJSON);
 			}
 		});
 	});

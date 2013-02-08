@@ -81,6 +81,13 @@
             items.push($(this).attr('id'));
           });
           return items;
+        } else if (method == 'toJSON') {
+          var items = [];
+          $(this).find(settings.element).each(function(index, elem) {
+            // items[index] = {};
+            items[index] = { id: $(this).attr('id') };
+          });
+          return JSON.stringify(items);
         }
         return;
       }

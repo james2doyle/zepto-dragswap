@@ -1,4 +1,4 @@
-HTML5 Sortable jQuery Plugin
+HTML5 Sortable Zepto.js Plugin
 ============================
 
 **[Demos](http://james2doyle.github.com/zepto-dragswap)**

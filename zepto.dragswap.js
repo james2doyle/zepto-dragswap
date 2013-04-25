@@ -51,7 +51,7 @@
     }
 
     function handleDragStart(e) {
-      $(this).addClass('moving');
+      $(this).addClass(settings.moveClass);
       // get the dragging element
       dragSrcEl = this;
       // it is moving
@@ -132,10 +132,11 @@
       var $elem = $this.find(settings.element).filter(':not(' + settings.exclude + ')');
 
       function handleDragEnd(e) {
-        $this.removeClass(settings.dropClass);
+        $this.removeClass(settings.moveClass);
         // this/e.target is the source node.
         $elem.each(function(index, item) {
-          $(this).removeClass(settings.overClass);
+          $(item).removeClass(settings.overClass);
+          $(item).removeClass(settings.moveClass);
         });
       }
       // set the items to draggable

@@ -39,7 +39,11 @@
         return;
       }
     };
-
+    
+    function excludePattern(elem){
+        return elem.is(settings.excludePatt);
+    }
+      
     function onAnimEnd(elem) {
       var $elem = $(elem);
       $elem.addClass(settings.dropClass);
@@ -51,15 +55,23 @@
     }
 
     function handleDragStart(e) {
+      if( !excludePattern($(this))){
+          e.preventDefault();
+          e.stopPropagation();
+          return false;
+      }
       $(this).addClass(settings.moveClass);
       // get the dragging element
       dragSrcEl = this;
       // it is moving
-      e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('text/html', this.innerHTML);
+      if(e.dataTransfer){
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('text/html', this.innerHTML);
+      }
     }
 
     function handleDragEnter(e) {
+        
       // this / e.target is the current hover target.
       $(this).addClass(settings.overClass);
     }
@@ -72,7 +84,9 @@
       if (e.preventDefault) {
         e.preventDefault(); // Necessary. Allows us to drop.
       }
-      e.dataTransfer.dropEffect = 'move'; // See the section on the DataTransfer object.
+      if(e.dataTransfer){
+        e.dataTransfer.dropEffect = 'move'; // See the section on the DataTransfer object.
+      }
       return false;
     }
 
@@ -81,9 +95,13 @@
       if (e.stopPropagation) {
         e.stopPropagation(); // Stops some browsers from redirecting.
       }
+      if( !excludePattern($(this))){
+          return false;
+      }    
+        
       // Don't do anything if dropping the same column we're draggi.
       if (dragSrcEl != this) {
-        // Set the source column's HTML to the HTML of the column wdropped on.
+        // Set the source column's HTML to the HTML of the column dropped on.
         var oldEl = {
           html: this.innerHTML,
           id: this.id
@@ -101,12 +119,27 @@
           onAnimEnd(this);
           onAnimEnd(dragSrcEl);
         }
+        $(this).siblings().removeAttr('draggable'); 
+        $(this).siblings().filter(settings.excludePatt).attr('draggable', true);  
         settings.dropComplete();
       }
       return false;
     }
 
     var settings = $.extend({}, this.defaultOptions, options);
+    if(settings.exclude){  
+        if(typeof settings.exclude != 'string'){
+            var excludePatt = '';
+            for(var i =0; i< settings.exclude.length; i++){
+                excludePatt += ':not(' + settings.exclude[i] + ')';
+            } 
+            settings.excludePatt = excludePatt;
+        }
+        else{
+          settings.excludePatt = ':not(' + settings.exclude + ')';
+        }
+    }
+      
     var method = String(options);
     var items = [];
     // check for the methods
@@ -126,27 +159,47 @@
       }
       return;
     }
+      
+    
+      
     return this.each(function(index, item) {
       var $this = $(this);
       // select all but the disabled things
-      var $elem = $this.find(settings.element).filter(':not(' + settings.exclude + ')');
-
-      function handleDragEnd(e) {
+      var $elem = $this.find(settings.element);
+  
+      var target = this;  
+      var config = { childList: true };  
+      var observer = new MutationObserver(function(mutations) {
+          //console.log(mutations); 
+          var $element = $this.find(settings.element);
+          $element.siblings().removeAttr('draggable'); 
+          $element.siblings().filter(settings.excludePatt).attr('draggable', true);      
+      });  
+        
+      observer.observe(target, config);         
+      
+      function handleDragEnd(e) {   
         $this.removeClass(settings.moveClass);
         // this/e.target is the source node.
+        //console.log('handleDragEnd');
+        $elem = $this.find(settings.element);
         $elem.each(function(index, item) {
+           // console.log(item);
           $(item).removeClass(settings.overClass);
           $(item).removeClass(settings.moveClass);
         });
       }
       // set the items to draggable
-      $elem.filter(':not(' + settings.exclude + ')').attr('draggable', true);
-      $elem.on('dragstart', handleDragStart);
-      $elem.on('dragenter', handleDragEnter);
-      $elem.on('dragover', handleDragOver);
-      $elem.on('dragleave', handleDragLeave);
-      $elem.on('drop', handleDrop);
-      $elem.on('dragend', handleDragEnd);
+      $elem.filter(settings.excludePatt).attr('draggable', true);
+        
+      $this.on('dragstart', settings.element, handleDragStart);
+
+      $this.on('dragenter', settings.element, handleDragEnter);
+      $this.on('dragover', settings.element, handleDragOver);
+      $this.on('dragleave', settings.element, handleDragLeave);
+      $this.on('drop', settings.element, handleDrop);
+      $this.on('dragend', settings.element, handleDragEnd);
+
     });
   };
 })(Zepto);

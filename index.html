@@ -195,37 +195,11 @@
 			<li>Works in IE 7+, Firefox 16+, Chrome 23+, Safari 5.1+ and, Opera 12.1+.</li>
 		</ul>
 	</section>
-	<section>
-		<h2>Sortable List</h2>
-		<ul class="sortable list">
-			<li id="item1">Item 1</li>
-			<li id="item2">Item 2</li>
-			<li id="item3">Item 3</li>
-			<li id="item4">Item 4</li>
-			<li id="item5">Item 5</li>
-			<li id="item6">Item 6</li>
-		</ul>
-	</section>
-	<section>
-		<h2>Sortable Grid</h2>
-		<ul class="sortable grid">
-			<li id="item1">Item 1</li>
-			<li id="item2">Item 2</li>
-			<li id="item3">Item 3</li>
-			<li id="item4">Item 4</li>
-			<li id="item5">Item 5</li>
-			<li id="item6">Item 6</li>
-		</ul>
-	</section>
+	
 	<section>
 		<h2>Exclude Items</h2>
 		<ul class="sortable list">
-			<li id="item1">Item 1</li>
-			<li id="item2">Item 2</li>
-			<li id="item3" class="disabled">Item 3</li>
-			<li id="item4">Item 4</li>
-			<li id="item5" class="disabled">Item 5</li>
-			<li id="item6" class="disabled">Item 6</li>
+
 		</ul>
 	</section>
 	<section>
@@ -251,8 +225,17 @@
 	<script>
 	$(function() {
 		$('.sortable').dragswap({
-			dropAnimation: true
+            element : 'li',
+			dropAnimation: true,
+            exclude : ['.correct', '.empty']
 		});
+        
+        $('.sortable').append('<li id="item1">Item 1</li>'
+			+'<li id="item2">Item 2</li>'
+			+'<li id="item3" class="correct">Item 3</li>'
+			+'<li id="item4">Item 4</li>'
+			+'<li id="item5" class="correct">Item 5</li>'
+			+'<li id="item6" class="correct">Item 6</li>');
 		$('.funcs').dragswap({
 			dropAnimation: false,
 			dropComplete: function() {

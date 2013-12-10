@@ -197,7 +197,7 @@
 	</section>
 	<section>
 		<h2>Sortable List</h2>
-		<ul class="sortable1 list">
+		<ul class="sortable list">
 			<li id="item1">Item 1</li>
 			<li id="item2">Item 2</li>
 			<li id="item3">Item 3</li>
@@ -208,7 +208,7 @@
 	</section>
 	<section>
 		<h2>Sortable Grid</h2>
-		<ul class="sortable2 grid">
+		<ul class="sortable grid">
 			<li id="item1">Item 1</li>
 			<li id="item2">Item 2</li>
 			<li id="item3">Item 3</li>
@@ -220,7 +220,18 @@
 	<section>
 		<h2>Exclude Items</h2>
 		<ul class="sortable list">
-
+            <li id="item1">Item 1</li>
+            <li id="item2">Item 2</li>
+            <li id="item3" class="disabled">Item 3</li>
+            <li id="item4">Item 4</li>
+            <li id="item5" class="disabled">Item 5</li>
+            <li id="item6" class="disabled">Item 6</li>
+		</ul>
+	</section>
+    <section>
+		<h2>Dynamic Exclude Items</h2>
+		<ul class="sortable_exclude_dynamic list">
+  
 		</ul>
 	</section>
 	<section>
@@ -245,13 +256,20 @@
 	<script src="zepto.dragswap.js"></script>
 	<script>
 	$(function() {
+        
+        $('.sortable_exclude_dynamic').dragswap({
+            element : 'li',
+			dropAnimation: true,
+            exclude : ['.correct', '.empty']
+		});
+        
 		$('.sortable').dragswap({
             element : 'li',
 			dropAnimation: true,
             exclude : ['.correct', '.empty']
 		});
         
-        $('.sortable').append('<li id="item1">Item 1</li>'
+        $('.sortable_exclude_dynamic').append('<li id="item1">Item 1</li>'
 			+'<li id="item2">Item 2</li>'
 			+'<li id="item3" class="correct">Item 3</li>'
 			+'<li id="item4">Item 4</li>'

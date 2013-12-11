@@ -164,7 +164,7 @@
       
     return this.each(function(index, item) {
       var $this = $(this);
-      // select all but the disabled things
+      // select all list items things
       var $elem = $this.find(settings.element);
   
       var target = this;  

@@ -292,13 +292,8 @@
             element : 'li',
 			dropAnimation: true,
             exclude : ['.correct', '.empty']
-		});
-        
-		$('.sortable').dragswap({
-            element : 'li',
-			dropAnimation: true  
-		});
-        
+		});  
+		
         $('.sortable_exclude_dynamic').append(
             '<li id="item1">Item 1</li>'
 			+'<li id="item2">Item 2</li>'
@@ -307,6 +302,11 @@
 			+'<li id="item5" class="empty"></li>'
 			+'<li id="item6" class="correct">Item 6</li>'
 			+'<li id="item7" class="correct">Item 7</li>');
+        
+        $('.sortable').dragswap({
+            element : 'li',
+			dropAnimation: true  
+		});
         
 		$('.funcs').dragswap({
 			dropAnimation: false,

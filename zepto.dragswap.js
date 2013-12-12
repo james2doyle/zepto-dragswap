@@ -55,19 +55,27 @@
     }
 
     function handleDragStart(e) {
-      if( !excludePattern($(this))){
+      if( !excludePattern($(this)) ){
           e.preventDefault();
           e.stopPropagation();
           return false;
       }
+        
       $(this).addClass(settings.moveClass);
       // get the dragging element
       dragSrcEl = this;
       // it is moving
-      if(e.dataTransfer){
-        e.dataTransfer.effectAllowed = 'move';
-        e.dataTransfer.setData('text/html', this.innerHTML);
-      }
+      if (e.originalEvent.dataTransfer) {
+          var dt = e.originalEvent.dataTransfer;
+          dt.effectAllowed = 'move';        
+          dt.setData('text/html', this.innerHTML);
+            
+        }
+        else if(e.dataTransfer){
+          var dt = e.dataTransfer;
+          dt.effectAllowed = 'move';        
+          dt.setData('text/html', this.innerHTML);
+        }
     }
 
     function handleDragEnter(e) {
@@ -84,9 +92,12 @@
       if (e.preventDefault) {
         e.preventDefault(); // Necessary. Allows us to drop.
       }
-      if(e.dataTransfer){
+      if (e.originalEvent.dataTransfer) {
+        e.originalEvent.dataTransfer.dropEffect = 'move'; // See the section on the DataTransfer object.
+    }
+    else if(e.dataTransfer){
         e.dataTransfer.dropEffect = 'move'; // See the section on the DataTransfer object.
-      }
+    }
       return false;
     }
 
@@ -166,9 +177,10 @@
       var $this = $(this);
       // select all list items things
       var $elem = $this.find(settings.element);
-  
+        
       var target = this;  
-      var config = { childList: true };  
+      var config = { childList: true };
+      //listen to modifications in the DOM
       var observer = new MutationObserver(function(mutations) {
           //console.log(mutations); 
           var $element = $this.find(settings.element);
@@ -183,6 +195,7 @@
         // this/e.target is the source node.
         //console.log('handleDragEnd');
         $elem = $this.find(settings.element);
+          //clean up after drag stuff
         $elem.each(function(index, item) {
            // console.log(item);
           $(item).removeClass(settings.overClass);

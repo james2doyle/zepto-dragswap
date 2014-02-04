@@ -85,7 +85,38 @@
 	.disabled {
 		opacity: 0.5;
 	}
-
+    
+    .sortable_exclude_dynamic {
+		margin: auto;
+		padding: 0;
+		width: 310px;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+    .sortable_exclude_dynamic li {
+		border: 1px solid #d97815;
+		background: #ff9933;
+		color: #fff;
+		text-shadow: 0 1px 1px #ac4e00;
+		box-shadow: inset 0 1px 1px rgba(255,255,255,0.7);
+	} 
+        
+    .sortable_exclude_dynamic li.correct {
+		border:1px solid #000000;
+        background:#cccccc;     
+            cursor:default;
+	}  
+    .sortable_exclude_dynamic li.empty{
+        border:none;
+        background:none;
+        color:#dcdcdc;
+            cursor:default;
+    }
+        
 	.over {
 		-webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
 		box-shadow: 0 5px 10px rgba(0,0,0,0.2);
@@ -220,12 +251,18 @@
 	<section>
 		<h2>Exclude Items</h2>
 		<ul class="sortable list">
-			<li id="item1">Item 1</li>
-			<li id="item2">Item 2</li>
-			<li id="item3" class="disabled">Item 3</li>
-			<li id="item4">Item 4</li>
-			<li id="item5" class="disabled">Item 5</li>
-			<li id="item6" class="disabled">Item 6</li>
+            <li id="item1">Item 1</li>
+            <li id="item2">Item 2</li>
+            <li id="item3" class="disabled">Item 3</li>
+            <li id="item4">Item 4</li>
+            <li id="item5" class="disabled">Item 5</li>
+            <li id="item6" class="disabled">Item 6</li>
+		</ul>
+	</section>
+    <section>
+		<h2>Dynamic Exclude Items</h2>
+		<ul class="sortable_exclude_dynamic list">
+  
 		</ul>
 	</section>
 	<section>
@@ -250,9 +287,27 @@
 	<script src="zepto.dragswap.js"></script>
 	<script>
 	$(function() {
-		$('.sortable').dragswap({
-			dropAnimation: true
+        
+        $('.sortable_exclude_dynamic').dragswap({
+            element : 'li',
+			dropAnimation: true,
+            exclude : ['.correct', '.empty']
+		});  
+		
+        $('.sortable_exclude_dynamic').append(
+            '<li id="item1">Item 1</li>'
+			+'<li id="item2">Item 2</li>'
+			+'<li id="item3" class="correct">Item 3</li>'
+            +'<li id="item4">Item 4</li>'                                  
+			+'<li id="item5" class="empty"></li>'
+			+'<li id="item6" class="correct">Item 6</li>'
+			+'<li id="item7" class="correct">Item 7</li>');
+        
+        $('.sortable').dragswap({
+            element : 'li',
+			dropAnimation: true  
 		});
+        
 		$('.funcs').dragswap({
 			dropAnimation: false,
 			dropComplete: function() {

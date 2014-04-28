@@ -7,6 +7,10 @@ Why Not Sortable
 ----------------
 It is sortable, but its more like swappable...
 
+### Mobile
+
+This plugin uses *HTML5 Drag and Drop*, which means **this is not supported by any mobile browsers**. Please see the [CanIUse](http://caniuse.com/#feat=dragndrop) entry.
+
 Features
 --------
 
@@ -20,6 +24,7 @@ Features
 
 Usage
 -----
+
 Use `sortable` method to create a sortable list:
 
 ``` javascript
@@ -34,6 +39,7 @@ $('.sortable').dragswap({
     dropComplete: function(){} // what to do when the drop is complete
 });
 ```
+
 serialize it
 
 ``` javascript
@@ -46,6 +52,7 @@ $('.sortable').dragswap('toJSON');
 
 Drop Animation
 --------------
+
 There is a function to detect animation end in the drop handler. Enabling dropAnimation will detect this. Otherwise the class will stay on the elements.
 
 To Do
@@ -59,9 +66,10 @@ To Do
 
 License
 -------
+
 (The MIT License)
 
-Copyright (c) 2013 James Doyle(james2doyle) <james2doyle@gmail.com>
+Copyright (c) 2014 James Doyle(james2doyle) <james2doyle@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the

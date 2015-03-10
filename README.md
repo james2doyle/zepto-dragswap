@@ -3,13 +3,17 @@ HTML5 Sortable Zepto.js Plugin
 
 **[Demos](http://james2doyle.github.com/zepto-dragswap)**
 
+!!WARNING FOR MOBILE!!
+----------------------
+
+This plugin uses native *HTML5 Drag and Drop*, which means **this is not supported by any mobile browsers/devices**. Please see the [CanIUse](http://caniuse.com/#feat=dragndrop) entry.
+
+Check out [Pep](http://pep.briangonzalez.org/) or [Dragabilly](http://draggabilly.desandro.com/) if you need touch support.
+
 Why Not Sortable
 ----------------
+
 It is sortable, but its more like swappable...
-
-### Mobile
-
-This plugin uses *HTML5 Drag and Drop*, which means **this is not supported by any mobile browsers**. Please see the [CanIUse](http://caniuse.com/#feat=dragndrop) entry.
 
 Features
 --------
